@@ -3,9 +3,6 @@ import { Chat, ChatMessage, ChatProfile } from './types';
 
 const API_URL = 'https://openrouter.ai/api/v1/chat/completions';
 
-// La clé API est maintenant codée en dur directement dans le code
-const API_KEY = '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';
-
 const getSystemPrompt = (profile: ChatProfile): string => {
   return `Vous êtes ${profile.name}, jouant le rôle de ${profile.role}. ${profile.description}
   
@@ -20,9 +17,12 @@ export const generateChatResponse = async (
   profile: ChatProfile
 ): Promise<string> => {
   try {
-    // Utilisation de la clé API codée en dur
+    const apiKey = import.meta.env.VITE_OPENROUTER_API_KEY;
     
-    // Format messages for the API
+    if (!apiKey) {
+      throw new Error('API key is not configured');
+    }
+    
     const formattedMessages = [
       {
         role: 'system',
@@ -38,7 +38,7 @@ export const generateChatResponse = async (
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${API_KEY}`,
+        'Authorization': `Bearer ${apiKey}`,
         'HTTP-Referer': window.location.origin,
         'X-Title': 'Emotica',
       },
@@ -52,11 +52,10 @@ export const generateChatResponse = async (
 
     if (!response.ok) {
       const errorData = await response.json();
-      console.error('Erreur API:', errorData);
+      console.error('API Error:', errorData);
       
-      // Throw a more specific error for authentication issues
       if (response.status === 401) {
-        throw new Error('Clé API invalide. Veuillez vérifier votre configuration de clé API OpenRouter.');
+        throw new Error('Invalid API key or authentication failed');
       }
       
       throw new Error(`API Error: ${errorData.error?.message || errorData.message || response.statusText}`);
@@ -65,7 +64,7 @@ export const generateChatResponse = async (
     const data = await response.json();
     return data.choices[0].message.content;
   } catch (error) {
-    console.error('Erreur lors de la génération de la réponse:', error);
+    console.error('Error generating response:', error);
     throw error;
   }
 };

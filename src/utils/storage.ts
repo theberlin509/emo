@@ -3,7 +3,6 @@ import { Chat, ChatProfile, User } from './types';
 
 const PROFILES_KEY = 'emotica_profiles';
 const CHATS_KEY = 'emotica_chats';
-const API_KEY = 'emotica_api_key';
 const USER_KEY = 'emotica_user';
 
 // Stockage des profils
@@ -70,19 +69,6 @@ export const saveChat = (chat: Chat): void => {
 export const deleteChat = (chatId: string): void => {
   const chats = getChats();
   saveChats(chats.filter((c) => c.id !== chatId));
-};
-
-// Clé API
-export const getApiKey = (): string | null => {
-  return localStorage.getItem(API_KEY);
-};
-
-export const saveApiKey = (key: string): void => {
-  localStorage.setItem(API_KEY, key);
-};
-
-export const clearApiKey = (): void => {
-  localStorage.removeItem(API_KEY);
 };
 
 // Gestion de l'authentification utilisateur

@@ -1,14 +1,7 @@
 import React from 'react';
-import { Button } from '@/components/ui/button';
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from '@/components/ui/dialog';
-import { Settings } from 'lucide-react';
+import { Button } from "./ui/button";
+import { Settings } from "lucide-react";
+import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "./ui/dialog";
 
 const SettingsDialog: React.FC = () => {
   return (
@@ -26,8 +19,10 @@ const SettingsDialog: React.FC = () => {
             Configurez votre application Emotica
           </DialogDescription>
         </DialogHeader>
-        <div className="mt-4 text-center text-muted-foreground">
-          <p>Aucun paramètre configurable disponible actuellement.</p>
+        <div className="mt-6 space-y-4">
+          <p className="text-sm text-muted-foreground">
+            La configuration de l'API est gérée par l'administrateur du système.
+          </p>
         </div>
       </DialogContent>
     </Dialog>
