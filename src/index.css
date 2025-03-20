@@ -1,0 +1,143 @@
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 240 10% 3.9%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 240 10% 3.9%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 10% 3.9%;
+
+    --primary: 336 80% 58%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 340 20% 96%;
+    --secondary-foreground: 340 50% 25%;
+
+    --muted: 340 10% 95%;
+    --muted-foreground: 340 5% 46%;
+
+    --accent: 340 20% 96%;
+    --accent-foreground: 340 50% 25%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 340 10% 90%;
+    --input: 340 10% 90%;
+    --ring: 340 80% 58%;
+
+    --radius: 0.75rem;
+
+    --sidebar-background: 340 30% 98%;
+    --sidebar-foreground: 340 10% 26%;
+    --sidebar-primary: 336 80% 58%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 340 20% 95%;
+    --sidebar-accent-foreground: 336 80% 58%;
+    --sidebar-border: 340 20% 91%;
+    --sidebar-ring: 336 80% 58%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  ::selection {
+    @apply bg-primary/20 text-foreground;
+  }
+}
+
+@layer utilities {
+  .glass {
+    @apply bg-white/70 backdrop-blur-lg border border-white/20 shadow-glass;
+  }
+  
+  .neomorphism {
+    @apply bg-secondary shadow-neomorphism rounded-xl;
+  }
+  
+  .text-balance {
+    text-wrap: balance;
+  }
+  
+  .typing-indicator {
+    @apply inline-flex gap-1.5 items-center;
+  }
+  
+  .typing-indicator-dot {
+    @apply w-2 h-2 rounded-full bg-current opacity-70;
+  }
+  
+  .typing-indicator-dot:nth-child(1) {
+    animation: bounce-soft 1s infinite 0.1s;
+  }
+  
+  .typing-indicator-dot:nth-child(2) {
+    animation: bounce-soft 1s infinite 0.2s;
+  }
+  
+  .typing-indicator-dot:nth-child(3) {
+    animation: bounce-soft 1s infinite 0.3s;
+  }
+}
+
+/* Animation classes */
+@layer components {
+  .transition-all-fast {
+    @apply transition-all duration-200 ease-in-out;
+  }
+  
+  .transition-all-medium {
+    @apply transition-all duration-300 ease-in-out;
+  }
+  
+  .transition-all-slow {
+    @apply transition-all duration-500 ease-in-out;
+  }
+  
+  .message-appear {
+    @apply animate-scale-in;
+  }
+  
+  .message-typing {
+    @apply relative;
+  }
+}
+
+/* Responsive adjustments */
+@layer utilities {
+  .responsive-container {
+    @apply container px-4 sm:px-6 md:px-8 mx-auto;
+  }
+  
+  .mobile-friendly {
+    @apply text-base sm:text-sm md:text-base;
+  }
+  
+  .chat-bubble {
+    @apply rounded-2xl p-3 shadow-sm;
+  }
+  
+  .chat-bubble-user {
+    @apply bg-primary text-primary-foreground rounded-tr-none;
+  }
+  
+  .chat-bubble-assistant {
+    @apply bg-secondary text-secondary-foreground rounded-tl-none;
+  }
+}
